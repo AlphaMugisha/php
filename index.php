@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=s, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>wallha ur slow</p>
-</body>
-</html>
+
+    <?php include 'db.php'; 
+    
+    $sql = "SELECT * FROM students join classes on students.class_id = classes.id";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "ID: " . $row["id"]. " - Name: " . $row["name"]. " - Class: " . $row["class_name"]. "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    ?>
