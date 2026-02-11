@@ -1,14 +1,18 @@
 
     <?php include 'db.php'; 
+    $conn = new mysqli($host, $username, $password, $dbname);
     
     $sql = "SELECT * FROM students join classes on students.class_id = classes.id";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            echo "ID: " . $row["id"]. " - Name: " . $row["name"]. " - Class: " . $row["class_name"]. "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
+    $result = mysqli_query($conn, $sql);
     ?>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Class</th>
+        </tr>
+        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+        <tr>
+            <td><?php echo $row['name']; ?></td>
+            <td><?php echo $row['class_name']; ?></td>
+        </tr>
+        <?php } ?>
